@@ -34,6 +34,8 @@ class Verbo:
             ("imperfetto", self.Imperfetto, imperfetto == "[regolare]"),
             ("trapassato prossimo", self.TrapassatoProssimo, participio == "[regolare]"),
             ("futuro", self.Futuro, futuro == "[regolare]"),
+            ("condizionale presente", self.CondizionalePresente, futuro == "[regolare]"),
+            ("condizionale passato", self.CondizionalePassato, participio == "[regolare]")
         ]
 
     def il_participio(self):
@@ -184,6 +186,55 @@ class Verbo:
 
         return soluzione
 
+    def CondizionalePresente(self):
+        prefisso = self.futuro
+
+        if self.futuro == "[regolare]":
+            suffisso = self.nome[-3 :]
+
+            if suffisso == "are":
+                prefisso = self.nome[: -3] + "er"
+            else:
+                prefisso = self.nome[: -1]
+
+        soluzione = [
+            prefisso + "ei",
+            prefisso + "esti",
+            prefisso + "ebbe",
+            prefisso + "emmo",
+            prefisso + "este",
+            prefisso + "ebbero",
+        ]
+
+        return soluzione
+
+    def CondizionalePassato(self):
+        soluzione = None
+        participio = self.il_participio()
+
+        if self.ausiliare == "avere":
+            soluzione = [
+                "avrei " + participio,
+                "avresti " + participio,
+                "avrebbe " + participio,
+                "avremmo " + participio,
+                "avreste " + participio,
+                "avrebbero " + participio,
+            ]
+        elif self.ausiliare == "essere":
+            participio = participio[: -1]
+
+            soluzione = [
+                "sarei " + participio + "o",
+                "saresti " + participio + "o",
+                "sarebbe " + participio + "o",
+                "saremmo " + participio + "i",
+                "sareste " + participio + "i",
+                "sarebbero " + participio + "i",
+            ]
+
+        return soluzione
+
 class Ita:
     def __init__(self):
         self.verbi = [
@@ -199,23 +250,29 @@ class Ita:
             "ero, eri, era, eravamo, eravate, erano",
             "sar"),
 
+            Verbo("aiutare", "avere",
+            "[regolare]",
+            "[regolare]",
+            "[regolare]",
+            "[regolare]"),
+
             Verbo("andare", "essere",
             "vado, vai, va, andiamo, andate, vanno",
             "[regolare]",
             "[regolare]",
             "andr"),
 
-            Verbo("dare", "avere",
-            "do, dai, da, diamo, date, danno",
-            "[regolare]",
-            "[regolare]",
-            "dar"),
-
             Verbo("cantare", "avere",
             "[regolare]",
             "[regolare]",
             "[regolare]",
             "[regolare]"),
+
+            Verbo("dare", "avere",
+            "do, dai, da, diamo, date, danno",
+            "[regolare]",
+            "[regolare]",
+            "dar"),
 
             Verbo("dimenticare", "avere",
             "[regolare]",
@@ -373,6 +430,12 @@ class Ita:
             "[regolare]",
             "[regolare]"),
 
+            Verbo("partire", "essere",
+            "[regolare]",
+            "[regolare]",
+            "[regolare]",
+            "[regolare]"),
+
             Verbo("uscire", "essere",
             "esco, esci, esce, usciamo, uscite, escono",
             "[regolare]",
@@ -396,10 +459,12 @@ class Ita:
             number += 1
             options += "\n{0}. {1}".format(number, t[0])
 
-        option = int(raw_input("\n" + options + "\n\n")) - 1
-        print ""
-
-        self.run(option)
+        try:
+            option = int(raw_input("\n" + options + "\n\n")) - 1
+            print ""
+            self.run(option)
+        except ValueError:
+            pass
 
     def run(self, option):
         while True:
@@ -408,7 +473,7 @@ class Ita:
             for verbo in self.verbi:
                 tempi = None
 
-                if option in range(0, len(verbo.tempi)):
+                if option in range(len(verbo.tempi)):
                     tempi = [verbo.tempi[option]]
                 else:
                     tempi = verbo.tempi
@@ -419,7 +484,7 @@ class Ita:
                     soluzioni = tempo[1]()
                     pronomi = ["io", "tu", "lui", "noi", "voi", "loro"]
 
-                    for i in range(0, len(pronomi)):
+                    for i in range(len(pronomi)):
                         errori = 0
 
                         while True:
