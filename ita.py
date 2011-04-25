@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import random, sys
+import random
 
 class Verbo:
     def __init__(self, nome, ausiliare, presente, participio, imperfetto, futuro):
@@ -402,52 +402,49 @@ class Ita:
         self.run(option)
 
     def run(self, option):
-        verbo = None
-        ultimo = None
-
         while True:
-            while verbo == ultimo:
-                verbo = random.choice(self.verbi)
+            random.shuffle(self.verbi)
 
-            ultimo = verbo
-            tempo = None
+            for verbo in self.verbi:
+                tempi = None
 
-            if option in range(0, len(verbo.tempi)):
-                tempo = verbo.tempi[option]
-            else:
-                tempo = random.choice(verbo.tempi)
+                if option in range(0, len(verbo.tempi)):
+                    tempi = [verbo.tempi[option]]
+                else:
+                    tempi = verbo.tempi
 
-            print verbo.nome + " in " + tempo[0] + ("" if tempo[2] else " *")
+                for tempo in tempi:
+                    print verbo.nome + " in " + tempo[0] + ("" if tempo[2] else " *")
 
-            soluzioni = tempo[1]()
-            pronomi = ["io", "tu", "lui", "noi", "voi", "loro"]
+                    soluzioni = tempo[1]()
+                    pronomi = ["io", "tu", "lui", "noi", "voi", "loro"]
 
-            for i in range(0, len(pronomi)):
-                errori = 0
+                    for i in range(0, len(pronomi)):
+                        errori = 0
 
-                while True:
-                    risposta = raw_input("  [?] " + pronomi[i] + " ")
+                        while True:
+                            risposta = raw_input("  [?] " + pronomi[i] + " ")
 
-                    if risposta == "q":
-                        sys.exit(0)
+                            if risposta == "q":
+                                return
 
-                    if risposta == soluzioni[i]:
-                        print "      Bravo!"
-                        break
-                    else:
-                        errori += 1
-                        consiglio = ""
+                            if risposta == soluzioni[i]:
+                                print "      Bravo!"
+                                break
+                            else:
+                                errori += 1
+                                consiglio = ""
 
-                        if errori == 1:
-                            consiglio = soluzioni[i][: len(soluzioni[i]) / 4] + "..."
-                        elif errori == 2:
-                            consiglio = soluzioni[i][: len(soluzioni[i]) / 2] + "..."
-                        else:
-                            consiglio = soluzioni[i]
+                                if errori == 1:
+                                    consiglio = soluzioni[i][: len(soluzioni[i]) / 4] + "..."
+                                elif errori == 2:
+                                    consiglio = soluzioni[i][: len(soluzioni[i]) / 2] + "..."
+                                else:
+                                    consiglio = soluzioni[i]
 
-                        print "      Consiglio: " + consiglio
+                                print "      Consiglio: " + consiglio
 
-            print ""
+                    print ""
 
 if __name__ == "__main__":
     Ita().intro()
