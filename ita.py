@@ -29,11 +29,11 @@ class Verbo:
         self.futuro = futuro
 
         self.tempi = [
-            ("presente", self.Presente),
-            ("passato prossimo", self.PassatoProssimo),
-            ("imperfetto", self.Imperfetto),
-            ("trapassato prossimo", self.TrapassatoProssimo),
-            ("futuro", self.Futuro),
+            ("presente", self.Presente, presente == "[regolare]"),
+            ("passato prossimo", self.PassatoProssimo, participio == "[regolare]"),
+            ("imperfetto", self.Imperfetto, imperfetto == "[regolare]"),
+            ("trapassato prossimo", self.TrapassatoProssimo, participio == "[regolare]"),
+            ("futuro", self.Futuro, futuro == "[regolare]"),
         ]
 
     def il_participio(self):
@@ -417,7 +417,7 @@ class Ita:
             else:
                 tempo = random.choice(verbo.tempi)
 
-            print verbo.nome + " in " + tempo[0]
+            print verbo.nome + " in " + tempo[0] + ("" if tempo[2] else " *")
 
             soluzioni = tempo[1]()
             pronomi = ["io", "tu", "lui", "noi", "voi", "loro"]
