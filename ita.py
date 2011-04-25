@@ -334,6 +334,12 @@ class Ita:
             "[regolare]",
             "[regolare]"),
 
+            Verbo("piacere", "essere",
+            "piaccio, piaci, piace, piacciamo, piacete, piacciono",
+            "piaciuto",
+            "[regolare]",
+            "[regolare]"),
+
             Verbo("potere", "avere",
             "posso, puoi, puo, possiamo, potete, possono",
             "[regolare]",
@@ -510,6 +516,8 @@ class Ita:
                                 print "      Consiglio: " + consiglio
 
                     print ""
+
+            print "Questo ciclo e completo!\n"
 
 if __name__ == "__main__":
     Ita().intro()
