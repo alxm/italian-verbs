@@ -265,11 +265,24 @@ class Ita:
             "[r]"),
         ]
 
-    def run(self):
+    def intro(self):
         print "{0} verbi * {1} tempi = {2} combinazioni\n".format(
             len(self.verbi), len(self.verbi[0].tempi),
             len(self.verbi) * len(self.verbi[0].tempi))
 
+        number = 0
+        options = "0. tutti"
+
+        for t in self.verbi[0].tempi:
+            number += 1
+            options += "\n{0}. {1}".format(number, t[0])
+
+        option = int(raw_input(options + "\n\n")) - 1
+        print ""
+
+        self.run(option)
+
+    def run(self, option):
         verbo = None
         ultimo = None
 
@@ -278,7 +291,12 @@ class Ita:
                 verbo = random.choice(self.verbi)
 
             ultimo = verbo
-            tempo = random.choice(verbo.tempi)
+            tempo = None
+
+            if option in range(0, len(verbo.tempi)):
+                tempo = verbo.tempi[option]
+            else:
+                tempo = random.choice(verbo.tempi)
 
             print verbo.nome + " in " + tempo[0]
 
@@ -313,4 +331,4 @@ class Ita:
             print ""
 
 if __name__ == "__main__":
-    Ita().run()
+    Ita().intro()
