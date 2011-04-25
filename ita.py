@@ -20,23 +20,71 @@
 import random, sys
 
 class Verbo:
-    def __init__(self, nome, presente, passato_prossimo):
+    def __init__(self, nome, presente, passato_prossimo, imperfetto):
         self.nome = nome
         self.tempi = [
             ("presente", self.Presente, presente),
-            ("passato prossimo", self.PassatoProssimo, passato_prossimo)
+            ("passato prossimo", self.PassatoProssimo, passato_prossimo),
+            ("imperfetto", self.Imperfetto, imperfetto),
         ]
 
     def Presente(self, frase):
-        return frase.split(", ")
+        soluzione = None
+
+        if frase == "[r]":
+            prefix = self.nome[0 : -3]
+            suffix = self.nome[-3 :]
+
+            if suffix == "are":
+                soluzione = [
+                    prefix + "o",
+                    prefix + "i",
+                    prefix + "a",
+                    prefix + "iamo",
+                    prefix + "ate",
+                    prefix + "ano",
+                ]
+            elif suffix == "ere":
+                soluzione = [
+                    prefix + "o",
+                    prefix + "i",
+                    prefix + "e",
+                    prefix + "iamo",
+                    prefix + "ete",
+                    prefix + "ono",
+                ]
+            elif suffix == "ire":
+                soluzione = [
+                    prefix + "o",
+                    prefix + "i",
+                    prefix + "e",
+                    prefix + "iamo",
+                    prefix + "ite",
+                    prefix + "ono",
+                ]
+        else:
+            soluzione = frase.split(", ")
+
+        return soluzione
 
     def PassatoProssimo(self, frase):
         soluzione = None
         frase = frase.split(", ")
 
-        if frase[0] == "avere":
-            participio = frase[1]
+        prefix = self.nome[0 : -3]
+        suffix = self.nome[-3 :]
 
+        participio = frase[1]
+
+        if participio == "[r]":
+            if suffix == "are":
+                participio = prefix + "ato"
+            elif suffix == "ere":
+                participio = prefix + "uto"
+            elif suffix == "ire":
+                participio = prefix + "ito"
+
+        if frase[0] == "avere":
             soluzione = [
                 "ho " + participio,
                 "hai " + participio,
@@ -45,8 +93,8 @@ class Verbo:
                 "avete " + participio,
                 "hanno " + participio,
             ]
-        else:
-            participio = frase[1][:-1]
+        elif frase[0] == "essere":
+            participio = participio[: -1]
 
             soluzione = [
                 "sono " + participio + "o",
@@ -59,108 +107,168 @@ class Verbo:
 
         return soluzione
 
+    def Imperfetto(self, frase):
+        soluzione = None
+
+        if frase == "[r]":
+            prefix = self.nome[0 : -2]
+
+            soluzione = [
+                prefix + "vo",
+                prefix + "vi",
+                prefix + "va",
+                prefix + "vamo",
+                prefix + "vate",
+                prefix + "vano",
+            ]
+        else:
+            soluzione = frase.split(", ")
+
+        return soluzione
+
 class Ita:
     def __init__(self):
         self.verbi = [
             Verbo("avere",
             "ho, hai, ha, abbiamo, avete, hanno",
-            "avere, avuto"),
+            "avere, [r]",
+            "[r]"),
 
             Verbo("essere",
             "sono, sei, e, siamo, siete, sono",
-            "essere, stato"),
+            "essere, stato",
+            "ero, eri, era, eravamo, eravate, erano"),
 
             Verbo("cantare",
-            "canto, canti, canta, cantiamo, cantate, cantano",
-            "avere, cantato"),
+            "[r]",
+            "avere, [r]",
+            "[r]"),
 
             Verbo("scrivere",
-            "scrivo, scrivi, scrive, scriviamo, scrivete, scrivono",
-            "avere, scritto"),
+            "[r]",
+            "avere, scritto",
+            "[r]"),
 
             Verbo("dormire",
-            "dormo, dormi, dorme, dormiamo, dormite, dormono",
-            "avere, dormito"),
+            "[r]",
+            "avere, [r]",
+            "[r]"),
 
             Verbo("andare",
             "vado, vai, va, andiamo, andate, vanno",
-            "essere, andato"),
+            "essere, [r]",
+            "[r]"),
 
             Verbo("fare",
             "faccio, fai, fa, facciamo, fate, fanno",
-            "avere, fato"),
+            "avere, [r]",
+            "facevo, facevi, faceva, facevamo, facevate, facevano"),
 
             Verbo("dare",
             "do, dai, da, diamo, date, danno",
-            "avere, dato"),
+            "avere, [r]",
+            "[r]"),
 
             Verbo("stare",
             "sto, stai, sta, stiamo, state, stanno",
-            "essere, stato"),
+            "essere, [r]",
+            "[r]"),
 
             Verbo("finire",
             "finisco, finisci, finisce, finiamo, finite, finiscono",
-            "avere, finito"),
+            "avere, [r]",
+            "[r]"),
 
             Verbo("bere",
             "bevo, bevi, beve, beviamo, bevete, bevono",
-            "avere, bevuto"),
+            "avere, bevuto",
+            "bevevo, bevevi, beveva, bevevamo, bevevate, bevevano"),
 
             Verbo("dovere",
             "devo, devi, deve, dobbiamo, dovete, devono",
-            "avere, dovuto"),
+            "avere, [r]",
+            "[r]"),
 
             Verbo("potere",
             "posso, puoi, puo, possiamo, potete, possono",
-            "avere, potuto"),
+            "avere, [r]",
+            "[r]"),
 
             Verbo("volere",
             "voglio, vuoi, vuole, vogliamo, volete, vogliono",
-            "voluto"),
+            "avere, [r]",
+            "[r]"),
 
             Verbo("dire",
             "dico, dici, dice, diciamo, dite, diciono",
-            "avere, detto"),
+            "avere, detto",
+            "dicevo, dicevi, diceva, dicevamo, dicevate, dicevano"),
 
             Verbo("uscire",
             "esco, esci, esce, usciamo, uscite, escono",
-            "essere, uscito"),
+            "essere, [r]",
+            "[r]"),
 
             Verbo("venire",
             "vengo, vieni, viene, veniamo, venite, vengono",
-            "essere, venuto"),
+            "essere, [r]",
+            "[r]"),
 
             Verbo("sapere",
             "so, sai, sa, sappiamo, sapete, sanno",
-            "avere, saputo"),
+            "avere, [r]",
+            "[r]"),
 
             Verbo("conoscere",
-            "conosco, conosci, conosce, conosciamo, conoscete, conoscono",
-            "avere, conosciuto"),
+            "[r]",
+            "avere, conosciuto",
+            "[r]"),
 
             Verbo("leggere",
-            "leggo, leggi, legge, leggiamo, leggete, leggono",
-            "avere, letto"),
+            "[r]",
+            "avere, letto",
+            "[r]"),
 
             Verbo("rispondere",
-            "rispondo, rispondi, risponde, rispondiamo, rispondete, rispondono",
-            "avere, risposto"),
+            "[r]",
+            "avere, risposto",
+            "[r]"),
 
             Verbo("spendere",
-            "spendo, spendi, spende, spendiamo, spendete, spendono",
-            "avere, speso"),
-
-            Verbo("aprire",
-            "apro, apri, apre, apriamo, aprite, aprono",
-            "avere, aperto"),
+            "[r]",
+            "avere, speso",
+            "[r]"),
 
             Verbo("offrire",
-            "offro, offri, offre, offriamo, offrite, offrono",
-            "avere, offerto"),
+            "[r]",
+            "avere, offerto",
+            "[r]"),
+
+            Verbo("vedere",
+            "[r]",
+            "avere, [r]",
+            "[r]"),
+
+            Verbo("aprire",
+            "[r]",
+            "avere, aperto",
+            "[r]"),
+
+            Verbo("chiudere",
+            "[r]",
+            "avere, chiuso",
+            "[r]"),
+
+            Verbo("prendere",
+            "[r]",
+            "avere, preso",
+            "[r]"),
         ]
 
     def run(self):
-        print "{0} verbi\n".format(len(self.verbi))
+        print "{0} verbi * {1} tempi = {2} combinazioni\n".format(
+            len(self.verbi), len(self.verbi[0].tempi),
+            len(self.verbi) * len(self.verbi[0].tempi))
 
         verbo = None
         ultimo = None
@@ -200,7 +308,7 @@ class Ita:
                         else:
                             consiglio = soluzioni[i]
 
-                        print "      Errore: " + consiglio
+                        print "      Consiglio: " + consiglio
 
             print ""
 
