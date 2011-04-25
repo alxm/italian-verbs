@@ -20,23 +20,25 @@
 import random, sys
 
 class Verbo:
-    def __init__(self, nome, ausiliare, presente, participio, imperfetto):
+    def __init__(self, nome, ausiliare, presente, participio, imperfetto, futuro):
         self.nome = nome
         self.ausiliare = ausiliare
         self.presente = presente
         self.participio = participio
         self.imperfetto = imperfetto
+        self.futuro = futuro
 
         self.tempi = [
             ("presente", self.Presente),
             ("passato prossimo", self.PassatoProssimo),
             ("imperfetto", self.Imperfetto),
             ("trapassato prossimo", self.TrapassatoProssimo),
+            ("futuro", self.Futuro),
         ]
 
     def il_participio(self):
         if self.participio == "[regolare]":
-            prefisso = self.nome[0 : -3]
+            prefisso = self.nome[: -3]
             suffisso = self.nome[-3 :]
 
             if suffisso == "are":
@@ -52,35 +54,35 @@ class Verbo:
         soluzione = None
 
         if self.presente == "[regolare]":
-            prefix = self.nome[0 : -3]
-            suffix = self.nome[-3 :]
+            prefisso = self.nome[: -3]
+            suffisso = self.nome[-3 :]
 
-            if suffix == "are":
+            if suffisso == "are":
                 soluzione = [
-                    prefix + "o",
-                    prefix + "i",
-                    prefix + "a",
-                    prefix + "iamo",
-                    prefix + "ate",
-                    prefix + "ano",
+                    prefisso + "o",
+                    prefisso + "i",
+                    prefisso + "a",
+                    prefisso + "iamo",
+                    prefisso + "ate",
+                    prefisso + "ano",
                 ]
-            elif suffix == "ere":
+            elif suffisso == "ere":
                 soluzione = [
-                    prefix + "o",
-                    prefix + "i",
-                    prefix + "e",
-                    prefix + "iamo",
-                    prefix + "ete",
-                    prefix + "ono",
+                    prefisso + "o",
+                    prefisso + "i",
+                    prefisso + "e",
+                    prefisso + "iamo",
+                    prefisso + "ete",
+                    prefisso + "ono",
                 ]
-            elif suffix == "ire":
+            elif suffisso == "ire":
                 soluzione = [
-                    prefix + "o",
-                    prefix + "i",
-                    prefix + "e",
-                    prefix + "iamo",
-                    prefix + "ite",
-                    prefix + "ono",
+                    prefisso + "o",
+                    prefisso + "i",
+                    prefisso + "e",
+                    prefisso + "iamo",
+                    prefisso + "ite",
+                    prefisso + "ono",
                 ]
         else:
             soluzione = self.presente.split(", ")
@@ -118,15 +120,15 @@ class Verbo:
         soluzione = None
 
         if self.imperfetto == "[regolare]":
-            prefix = self.nome[0 : -2]
+            prefisso = self.nome[: -2]
 
             soluzione = [
-                prefix + "vo",
-                prefix + "vi",
-                prefix + "va",
-                prefix + "vamo",
-                prefix + "vate",
-                prefix + "vano",
+                prefisso + "vo",
+                prefisso + "vi",
+                prefisso + "va",
+                prefisso + "vamo",
+                prefisso + "vate",
+                prefisso + "vano",
             ]
         else:
             soluzione = self.imperfetto.split(", ")
@@ -160,130 +162,201 @@ class Verbo:
 
         return soluzione
 
+    def Futuro(self):
+        prefisso = self.futuro
+
+        if self.futuro == "[regolare]":
+            suffisso = self.nome[-3 :]
+
+            if suffisso == "are":
+                prefisso = self.nome[: -3] + "er"
+            else:
+                prefisso = self.nome[: -1]
+
+        soluzione = [
+            prefisso + "o",
+            prefisso + "ai",
+            prefisso + "a",
+            prefisso + "emo",
+            prefisso + "ete",
+            prefisso + "anno",
+        ]
+
+        return soluzione
+
 class Ita:
     def __init__(self):
         self.verbi = [
             Verbo("avere", "avere",
             "ho, hai, ha, abbiamo, avete, hanno",
             "[regolare]",
-            "[regolare]"),
+            "[regolare]",
+            "avr"),
 
             Verbo("essere", "essere",
             "sono, sei, e, siamo, siete, sono",
             "stato",
-            "ero, eri, era, eravamo, eravate, erano"),
+            "ero, eri, era, eravamo, eravate, erano",
+            "sar"),
 
             Verbo("andare", "essere",
             "vado, vai, va, andiamo, andate, vanno",
             "[regolare]",
-            "[regolare]"),
+            "[regolare]",
+            "andr"),
 
             Verbo("dare", "avere",
             "do, dai, da, diamo, date, danno",
             "[regolare]",
-            "[regolare]"),
+            "[regolare]",
+            "dar"),
 
             Verbo("cantare", "avere",
             "[regolare]",
             "[regolare]",
+            "[regolare]",
             "[regolare]"),
+
+            Verbo("dimenticare", "avere",
+            "[regolare]",
+            "[regolare]",
+            "[regolare]",
+            "dimenticher"),
 
             Verbo("fare", "avere",
             "faccio, fai, fa, facciamo, fate, fanno",
             "[regolare]",
-            "facevo, facevi, faceva, facevamo, facevate, facevano"),
+            "facevo, facevi, faceva, facevamo, facevate, facevano",
+            "far"),
+
+            Verbo("mangiare", "avere",
+            "[regolare]",
+            "[regolare]",
+            "[regolare]",
+            "manger"),
 
             Verbo("stare", "essere",
             "sto, stai, sta, stiamo, state, stanno",
             "[regolare]",
-            "[regolare]"),
+            "[regolare]",
+            "star"),
 
             Verbo("bere", "avere",
             "bevo, bevi, beve, beviamo, bevete, bevono",
             "bevuto",
-            "bevevo, bevevi, beveva, bevevamo, bevevate, bevevano"),
+            "bevevo, bevevi, beveva, bevevamo, bevevate, bevevano",
+            "berr"),
+
+            Verbo("cadere", "avere",
+            "[regolare]",
+            "[regolare]",
+            "[regolare]",
+            "cadr"),
 
             Verbo("chiudere", "avere",
             "[regolare]",
             "chiuso",
+            "[regolare]",
             "[regolare]"),
 
             Verbo("conoscere", "avere",
             "[regolare]",
             "conosciuto",
+            "[regolare]",
             "[regolare]"),
 
             Verbo("dovere", "avere",
             "devo, devi, deve, dobbiamo, dovete, devono",
             "[regolare]",
-            "[regolare]"),
+            "[regolare]",
+            "dovr"),
 
             Verbo("leggere", "avere",
             "[regolare]",
             "letto",
+            "[regolare]",
             "[regolare]"),
 
             Verbo("potere", "avere",
             "posso, puoi, puo, possiamo, potete, possono",
             "[regolare]",
-            "[regolare]"),
+            "[regolare]",
+            "potr"),
 
             Verbo("prendere", "avere",
             "[regolare]",
             "preso",
+            "[regolare]",
             "[regolare]"),
 
             Verbo("ridere", "avere",
             "[regolare]",
             "riso",
+            "[regolare]",
             "[regolare]"),
 
             Verbo("rimanere", "essere",
             "rimango, rimani, rimane, rimaniamo, rimanete, rimangono",
             "rimasto",
+            "[regolare]",
             "[regolare]"),
 
             Verbo("rispondere", "avere",
             "[regolare]",
             "risposto",
+            "[regolare]",
             "[regolare]"),
 
             Verbo("sapere", "avere",
             "so, sai, sa, sappiamo, sapete, sanno",
             "[regolare]",
-            "[regolare]"),
+            "[regolare]",
+            "sapr"),
 
             Verbo("scrivere", "avere",
             "[regolare]",
             "scritto",
+            "[regolare]",
             "[regolare]"),
 
             Verbo("spendere", "avere",
             "[regolare]",
             "speso",
+            "[regolare]",
             "[regolare]"),
 
             Verbo("vedere", "avere",
             "[regolare]",
             "[regolare]",
-            "[regolare]"),
+            "[regolare]",
+            "vedr"),
+
+            Verbo("vivere", "avere",
+            "[regolare]",
+            "vissuto",
+            "[regolare]",
+            "vivr"),
 
             Verbo("volere", "avere",
             "voglio, vuoi, vuole, vogliamo, volete, vogliono",
             "[regolare]",
-            "[regolare]"),
+            "[regolare]",
+            "vorr"),
 
             Verbo("aprire", "avere",
             "[regolare]",
             "aperto",
+            "[regolare]",
             "[regolare]"),
 
             Verbo("dire", "avere",
             "dico, dici, dice, diciamo, dite, diciono",
             "detto",
-            "dicevo, dicevi, diceva, dicevamo, dicevate, dicevano"),
+            "dicevo, dicevi, diceva, dicevamo, dicevate, dicevano",
+            "[regolare]"),
 
             Verbo("dormire", "avere",
+            "[regolare]",
             "[regolare]",
             "[regolare]",
             "[regolare]"),
@@ -291,27 +364,31 @@ class Ita:
             Verbo("finire", "avere",
             "finisco, finisci, finisce, finiamo, finite, finiscono",
             "[regolare]",
+            "[regolare]",
             "[regolare]"),
 
             Verbo("offrire", "avere",
             "[regolare]",
             "offerto",
+            "[regolare]",
             "[regolare]"),
 
             Verbo("uscire", "essere",
             "esco, esci, esce, usciamo, uscite, escono",
+            "[regolare]",
             "[regolare]",
             "[regolare]"),
 
             Verbo("venire", "essere",
             "vengo, vieni, viene, veniamo, venite, vengono",
             "[regolare]",
-            "[regolare]"),
+            "[regolare]",
+            "verr"),
         ]
 
     def intro(self):
         number = 0
-        options = "0. tutti ({0} verbi, {1} tempi = {2} combinazioni)\n".format(
+        options = "0. tutti - {0} verbi, {1} tempi, {2} combinazioni\n".format(
             len(self.verbi), len(self.verbi[0].tempi),
             len(self.verbi) * len(self.verbi[0].tempi))
 
@@ -362,9 +439,9 @@ class Ita:
                         consiglio = ""
 
                         if errori == 1:
-                            consiglio = soluzioni[i][0 : len(soluzioni[i]) / 4] + "..."
+                            consiglio = soluzioni[i][: len(soluzioni[i]) / 4] + "..."
                         elif errori == 2:
-                            consiglio = soluzioni[i][0 : len(soluzioni[i]) / 2] + "..."
+                            consiglio = soluzioni[i][: len(soluzioni[i]) / 2] + "..."
                         else:
                             consiglio = soluzioni[i]
 
