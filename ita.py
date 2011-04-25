@@ -139,8 +139,73 @@ class Ita:
             "essere, stato",
             "ero, eri, era, eravamo, eravate, erano"),
 
+            Verbo("andare",
+            "vado, vai, va, andiamo, andate, vanno",
+            "essere, [r]",
+            "[r]"),
+
+            Verbo("dare",
+            "do, dai, da, diamo, date, danno",
+            "avere, [r]",
+            "[r]"),
+
             Verbo("cantare",
             "[r]",
+            "avere, [r]",
+            "[r]"),
+
+            Verbo("fare",
+            "faccio, fai, fa, facciamo, fate, fanno",
+            "avere, [r]",
+            "facevo, facevi, faceva, facevamo, facevate, facevano"),
+
+            Verbo("stare",
+            "sto, stai, sta, stiamo, state, stanno",
+            "essere, [r]",
+            "[r]"),
+
+            Verbo("bere",
+            "bevo, bevi, beve, beviamo, bevete, bevono",
+            "avere, bevuto",
+            "bevevo, bevevi, beveva, bevevamo, bevevate, bevevano"),
+
+            Verbo("chiudere",
+            "[r]",
+            "avere, chiuso",
+            "[r]"),
+
+            Verbo("conoscere",
+            "[r]",
+            "avere, conosciuto",
+            "[r]"),
+
+            Verbo("dovere",
+            "devo, devi, deve, dobbiamo, dovete, devono",
+            "avere, [r]",
+            "[r]"),
+
+            Verbo("leggere",
+            "[r]",
+            "avere, letto",
+            "[r]"),
+
+            Verbo("potere",
+            "posso, puoi, puo, possiamo, potete, possono",
+            "avere, [r]",
+            "[r]"),
+
+            Verbo("prendere",
+            "[r]",
+            "avere, preso",
+            "[r]"),
+
+            Verbo("rispondere",
+            "[r]",
+            "avere, risposto",
+            "[r]"),
+
+            Verbo("sapere",
+            "so, sai, sa, sappiamo, sapete, sanno",
             "avere, [r]",
             "[r]"),
 
@@ -149,48 +214,13 @@ class Ita:
             "avere, scritto",
             "[r]"),
 
-            Verbo("dormire",
+            Verbo("spendere",
             "[r]",
-            "avere, [r]",
+            "avere, speso",
             "[r]"),
 
-            Verbo("andare",
-            "vado, vai, va, andiamo, andate, vanno",
-            "essere, [r]",
-            "[r]"),
-
-            Verbo("fare",
-            "faccio, fai, fa, facciamo, fate, fanno",
-            "avere, [r]",
-            "facevo, facevi, faceva, facevamo, facevate, facevano"),
-
-            Verbo("dare",
-            "do, dai, da, diamo, date, danno",
-            "avere, [r]",
-            "[r]"),
-
-            Verbo("stare",
-            "sto, stai, sta, stiamo, state, stanno",
-            "essere, [r]",
-            "[r]"),
-
-            Verbo("finire",
-            "finisco, finisci, finisce, finiamo, finite, finiscono",
-            "avere, [r]",
-            "[r]"),
-
-            Verbo("bere",
-            "bevo, bevi, beve, beviamo, bevete, bevono",
-            "avere, bevuto",
-            "bevevo, bevevi, beveva, bevevamo, bevevate, bevevano"),
-
-            Verbo("dovere",
-            "devo, devi, deve, dobbiamo, dovete, devono",
-            "avere, [r]",
-            "[r]"),
-
-            Verbo("potere",
-            "posso, puoi, puo, possiamo, potete, possono",
+            Verbo("vedere",
+            "[r]",
             "avere, [r]",
             "[r]"),
 
@@ -199,10 +229,30 @@ class Ita:
             "avere, [r]",
             "[r]"),
 
+            Verbo("aprire",
+            "[r]",
+            "avere, aperto",
+            "[r]"),
+
             Verbo("dire",
             "dico, dici, dice, diciamo, dite, diciono",
             "avere, detto",
             "dicevo, dicevi, diceva, dicevamo, dicevate, dicevano"),
+
+            Verbo("dormire",
+            "[r]",
+            "avere, [r]",
+            "[r]"),
+
+            Verbo("finire",
+            "finisco, finisci, finisce, finiamo, finite, finiscono",
+            "avere, [r]",
+            "[r]"),
+
+            Verbo("offrire",
+            "[r]",
+            "avere, offerto",
+            "[r]"),
 
             Verbo("uscire",
             "esco, esci, esce, usciamo, uscite, escono",
@@ -212,56 +262,6 @@ class Ita:
             Verbo("venire",
             "vengo, vieni, viene, veniamo, venite, vengono",
             "essere, [r]",
-            "[r]"),
-
-            Verbo("sapere",
-            "so, sai, sa, sappiamo, sapete, sanno",
-            "avere, [r]",
-            "[r]"),
-
-            Verbo("conoscere",
-            "[r]",
-            "avere, conosciuto",
-            "[r]"),
-
-            Verbo("leggere",
-            "[r]",
-            "avere, letto",
-            "[r]"),
-
-            Verbo("rispondere",
-            "[r]",
-            "avere, risposto",
-            "[r]"),
-
-            Verbo("spendere",
-            "[r]",
-            "avere, speso",
-            "[r]"),
-
-            Verbo("offrire",
-            "[r]",
-            "avere, offerto",
-            "[r]"),
-
-            Verbo("vedere",
-            "[r]",
-            "avere, [r]",
-            "[r]"),
-
-            Verbo("aprire",
-            "[r]",
-            "avere, aperto",
-            "[r]"),
-
-            Verbo("chiudere",
-            "[r]",
-            "avere, chiuso",
-            "[r]"),
-
-            Verbo("prendere",
-            "[r]",
-            "avere, preso",
             "[r]"),
         ]
 
