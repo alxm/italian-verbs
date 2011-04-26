@@ -485,35 +485,43 @@ class Ita:
                     tempi = verbo.tempi
 
                 for tempo in tempi:
-                    print verbo.nome + " in " + tempo[0] + ("" if tempo[2] else " *")
+                    while True:
+                        print verbo.nome + " in " + tempo[0] + ("" if tempo[2] else " *")
 
-                    soluzioni = tempo[1]()
-                    pronomi = ["io", "tu", "lui", "noi", "voi", "loro"]
+                        soluzioni = tempo[1]()
+                        pronomi = ["io", "tu", "lui", "noi", "voi", "loro"]
 
-                    for i in range(len(pronomi)):
-                        errori = 0
+                        errori_totali = 0
 
-                        while True:
-                            risposta = raw_input("  [?] " + pronomi[i] + " ")
+                        for i in range(len(pronomi)):
+                            errori = 0
 
-                            if risposta == "q":
-                                return
+                            while True:
+                                risposta = raw_input("  [?] " + pronomi[i] + " ")
 
-                            if risposta == soluzioni[i]:
-                                print "      Bravo!"
-                                break
-                            else:
-                                errori += 1
-                                consiglio = ""
+                                if risposta == "q":
+                                    return
 
-                                if errori == 1:
-                                    consiglio = soluzioni[i][: len(soluzioni[i]) / 4] + "..."
-                                elif errori == 2:
-                                    consiglio = soluzioni[i][: len(soluzioni[i]) / 2] + "..."
+                                if risposta == soluzioni[i]:
+                                    print "      Bravo!"
+                                    break
                                 else:
-                                    consiglio = soluzioni[i]
+                                    errori += 1
+                                    errori_totali += 1
 
-                                print "      Consiglio: " + consiglio
+                                    consiglio = ""
+
+                                    if errori == 1:
+                                        consiglio = soluzioni[i][: len(soluzioni[i]) / 4] + "..."
+                                    elif errori == 2:
+                                        consiglio = soluzioni[i][: len(soluzioni[i]) / 2] + "..."
+                                    else:
+                                        consiglio = soluzioni[i]
+
+                                    print "      Consiglio: " + consiglio
+
+                        if errori_totali == 0:
+                            break
 
                     print ""
 
