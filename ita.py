@@ -455,59 +455,50 @@ class Ita:
             "verr"),
         ]
 
+        self.opzione1 = None # verbi irregolari o tutti verbi
+        self.opzione2 = None # che tempo, o tutti tempi
+
     def intro(self):
-        number = 0
-        options = "0. tutti - {0} verbi, {1} tempi, {2} combinazioni\n".format(
-            len(self.verbi), len(self.verbi[0].tempi),
-            len(self.verbi) * len(self.verbi[0].tempi))
-
-        for t in self.verbi[0].tempi:
-            number += 1
-            options += "\n{0}. {1}".format(number, t[0])
-
         try:
-            option = int(raw_input("\n" + options + "\n\n")) - 1
-            print ""
-            self.run(option)
+            read = raw_input("\n1. verbi irregolari\n2. tutti verbi\n\n")
+            self.opzione1 = int(read) == 1
         except ValueError:
-            pass
-
-    def irregolari(self, option):
-        if option not in range(len(self.verbi[0].tempi)):
             return
 
-        for v in self.verbi:
-            tempo = v.tempi[option]
+        opzioni = "0. tutti tempi"
+        numero = 1
 
-            if not tempo[2]:
-                print v.nome + " in " + tempo[0] + ":"
+        for t in self.verbi[0].tempi:
+            opzioni += "\n{0}. {1}".format(numero, t[0])
+            numero += 1
 
-                soluzione = ""
-                soluzioni = tempo[1]()
+        try:
+            read = raw_input("\n" + opzioni + "\n\n")
+            self.opzione2 = int(read) - 1
+            print ""
+        except ValueError:
+            return
 
-                for s in soluzioni:
-                    soluzione += s + ", "
+        self.run()
 
-                print soluzione[:-2] + "\n"
-
-    def run(self, option):
-        self.irregolari(option)
-
+    def run(self):
         while True:
             random.shuffle(self.verbi)
 
             for verbo in self.verbi:
                 tempi = None
 
-                if option in range(len(verbo.tempi)):
-                    tempi = [verbo.tempi[option]]
+                if self.opzione2 in range(len(verbo.tempi)):
+                    tempi = [verbo.tempi[self.opzione2]]
                 else:
                     tempi = verbo.tempi
 
                 for tempo in tempi:
+                    if self.opzione1 and tempo[2]:
+                        continue
+
                     while True:
-                        print "{0} in {1} {2}".format(
-                            verbo.nome, tempo[0], ("" if tempo[2] else "*"))
+                        print verbo.nome + " in " + tempo[0]
 
                         soluzioni = tempo[1]()
                         pronomi = ["io", "tu", "lui", "noi", "voi", "loro"]
