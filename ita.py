@@ -486,7 +486,8 @@ class Ita:
 
                 for tempo in tempi:
                     while True:
-                        print verbo.nome + " in " + tempo[0] + ("" if tempo[2] else " *")
+                        print "{0} in {1} {2}".format(
+                            verbo.nome, tempo[0], ("" if tempo[2] else "*"))
 
                         soluzioni = tempo[1]()
                         pronomi = ["io", "tu", "lui", "noi", "voi", "loro"]
@@ -502,7 +503,7 @@ class Ita:
                                 if risposta == "q":
                                     return
 
-                                if risposta == soluzioni[i]:
+                                if risposta.strip() == soluzioni[i]:
                                     print "      Bravo!"
                                     break
                                 else:
