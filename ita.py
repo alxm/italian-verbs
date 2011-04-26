@@ -472,7 +472,27 @@ class Ita:
         except ValueError:
             pass
 
+    def irregolari(self, option):
+        if option not in range(len(self.verbi[0].tempi)):
+            return
+
+        for v in self.verbi:
+            tempo = v.tempi[option]
+
+            if not tempo[2]:
+                print v.nome + " in " + tempo[0] + ":"
+
+                soluzione = ""
+                soluzioni = tempo[1]()
+
+                for s in soluzioni:
+                    soluzione += s + ", "
+
+                print soluzione[:-2] + "\n"
+
     def run(self, option):
+        self.irregolari(option)
+
         while True:
             random.shuffle(self.verbi)
 
