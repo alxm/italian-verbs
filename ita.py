@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 """
     Copyright 2011 Alex Margarit
@@ -475,7 +475,7 @@ class Ita:
         try:
             read = raw_input("\n" + opzioni + "\n\n")
             self.opzione2 = int(read) - 1
-            print ""
+            print("")
         except ValueError:
             return
 
@@ -498,7 +498,7 @@ class Ita:
                         continue
 
                     while True:
-                        print verbo.nome + " in " + tempo[0]
+                        print(verbo.nome + " in " + tempo[0])
 
                         soluzioni = tempo[1]()
                         pronomi = ["io", "tu", "lui", "noi", "voi", "loro"]
@@ -515,7 +515,7 @@ class Ita:
                                     return
 
                                 if risposta.strip() == soluzioni[i]:
-                                    print "      Bravo!"
+                                    print("      Bravo!")
                                     break
                                 else:
                                     errori += 1
@@ -530,14 +530,14 @@ class Ita:
                                     else:
                                         consiglio = soluzioni[i]
 
-                                    print "      Consiglio: " + consiglio
+                                    print("      Consiglio: " + consiglio)
 
                         if errori_totali == 0:
                             break
 
-                    print ""
+                    print("")
 
-            print "Questo ciclo e completo!\n"
+            print("Questo ciclo e completo!\n")
 
 if __name__ == "__main__":
     Ita().intro()
