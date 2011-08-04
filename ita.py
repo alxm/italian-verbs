@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import random
+import random, sys
 
 class Verbo:
     def __init__(self, nome, ausiliare, presente, participio, imperfetto, futuro):
@@ -458,9 +458,15 @@ class Ita:
         self.opzione1 = None # verbi irregolari o tutti verbi
         self.opzione2 = None # che tempo, o tutti tempi
 
+    def leggere(self, text):
+        if sys.version_info[0] > 2:
+            return input(text)
+        else:
+            return raw_input(text)
+
     def intro(self):
         try:
-            read = raw_input("\n1. verbi irregolari\n2. tutti verbi\n\n")
+            read = self.leggere("\n1. verbi irregolari\n2. tutti verbi\n\n")
             self.opzione1 = int(read) == 1
         except ValueError:
             return
@@ -473,7 +479,7 @@ class Ita:
             numero += 1
 
         try:
-            read = raw_input("\n" + opzioni + "\n\n")
+            read = self.leggere("\n" + opzioni + "\n\n")
             self.opzione2 = int(read) - 1
             print("")
         except ValueError:
@@ -509,7 +515,7 @@ class Ita:
                             errori = 0
 
                             while True:
-                                risposta = raw_input("  [?] " + pronomi[i] + " ")
+                                risposta = self.leggere("  [?] " + pronomi[i] + " ")
 
                                 if risposta == "q":
                                     return
@@ -524,9 +530,9 @@ class Ita:
                                     consiglio = ""
 
                                     if errori == 1:
-                                        consiglio = soluzioni[i][: len(soluzioni[i]) / 4] + "..."
+                                        consiglio = soluzioni[i][: int(len(soluzioni[i]) / 4)] + "..."
                                     elif errori == 2:
-                                        consiglio = soluzioni[i][: len(soluzioni[i]) / 2] + "..."
+                                        consiglio = soluzioni[i][: int(len(soluzioni[i]) / 2)] + "..."
                                     else:
                                         consiglio = soluzioni[i]
 

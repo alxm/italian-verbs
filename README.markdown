@@ -3,6 +3,8 @@ italian-verbs
 
 Command-line quiz to conjugate Italian verbs. Covers presente, passato prossimo, imperfetto, trapassato prossimo, futuro, condizionale presente, and condizionale passato. Both regular and irregular verbs. Made to help me study for an exam.
 
+At each stage, type the number of the option you want to select, then press Enter. Input `q` at any time to exit.
+
 Sample Use
 ----------
 
